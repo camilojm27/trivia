@@ -1,3 +1,4 @@
+import 'game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -31,7 +32,7 @@ class AndroidTriviaHome extends StatelessWidget {
               
               SvgPicture.asset('assets/images/android_trivia.svg'),
               RaisedButton(
-                onPressed: () {},
+                onPressed: logr,
                 child: Text('PLAY', style: TextStyle(color: Colors.purple),),
                 color: Colors.grey.shade400,
               )
