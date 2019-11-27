@@ -9,8 +9,12 @@ class Trivia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: '/game',
+      routes: {
+        '/' : (context) => AndroidTriviaHome(title: _titulo,),
+        '/game' : (context) => MyStatefulWidget(),
+      },
       title: _titulo,
-      home: AndroidTriviaHome(title: _titulo,),
     );
   }
 }
@@ -32,7 +36,9 @@ class AndroidTriviaHome extends StatelessWidget {
               
               SvgPicture.asset('assets/images/android_trivia.svg'),
               RaisedButton(
-                onPressed: logr,
+                onPressed: (){
+                  Navigator.pushNamed(context, '/game');
+                },
                 child: Text('PLAY', style: TextStyle(color: Colors.purple),),
                 color: Colors.grey.shade400,
               )
