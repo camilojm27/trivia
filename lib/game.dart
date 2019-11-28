@@ -94,7 +94,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               padding: const EdgeInsets.all(16.0),
               child: RaisedButton(
                 child: Text('SUBMIT'),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/game/over');
+                },
               ),
             )
           ],
