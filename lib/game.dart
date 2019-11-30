@@ -59,10 +59,30 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     answers.shuffle();
     _questionIndex++;
   }
+ static String _groupValueRadioButtons;
+
+
+  List<Widget> makeRadios(){
+    List<Widget> list = new List<Widget> ();
+    for(int i=0; i <= 3; i++){
+
+    list.add(RadioListTile(title: Text(_questiions[i].answers[i]), value: _questiions[i].answers[i], groupValue: _groupValueRadioButtons,
+        onChanged: (value){setState(() {
+          _groupValueRadioButtons = value;
+        });} ));
+    }
+    return list;
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
+    if(_questionIndex == 0){
+
     _randomizeQuestions();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Android Trivia ($_questionIndex/$_numQuestion)'),
@@ -79,15 +99,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
             Expanded(
               child: ListView(
-                children: _questiions[_questionIndex]
-                    .answers
-                    .map((index) => RadioListTile(
-                          title: Text(index),
-                          groupValue: _questionIndex,
-                          onChanged: (val) {},
-                        ))
-                    .take(_questiions[_questionIndex].answers.length)
-                    .toList(),
+                children: makeRadios(),
               ),
             ),
             Padding(
