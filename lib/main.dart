@@ -1,4 +1,5 @@
 import 'package:trivia/game_over.dart';
+import 'package:trivia/game_won.dart';
 
 import 'game.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class Trivia extends StatelessWidget {
         '/' : (context) => AndroidTriviaHome(title: _titulo,),
         '/game' : (context) => MyStatefulWidget(),
         '/game/over' : (context) => GameOverFragment(),
+        '/game/won' : (context) => GameWonFragment(),
       },
       title: _titulo,
     );

@@ -10,9 +10,6 @@ class Question {
 
   Question(this.text, this.answers);
 
-  String get texto {
-    return '$text $answers';
-  }
 }
 
 final SvgPicture background =
@@ -34,10 +31,6 @@ List<Question> _questiions = [
   Question('Registers app with launcher?',['intent-filter', 'app-registry', 'launcher-registry', 'app-launcher']),
   Question('Mark a layout for Data Binding?', ['<layout>', '<binding>', '<data-binding>', '<dbinding>'])];
 
-void logr() {
-  _questiions.forEach((n) => print(n.texto));
-}
-
 class MyStatefulWidget extends StatefulWidget {
   MyStatefulWidget({Key key}) : super(key: key);
 
@@ -53,11 +46,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   }
 
   void setQuestions() {
-    currentQuestion = _questiions[_questionIndex];
+    _questionIndex++;
+    currentQuestion = _questiions[_questionIndex - 1];
 
     answers = currentQuestion.answers.toList();
     answers.shuffle();
-    _questionIndex++;
   }
  static String _groupValueRadioButtons;
 
@@ -66,7 +59,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     List<Widget> list = new List<Widget> ();
     for(int i=0; i <= 3; i++){
 
-    list.add(RadioListTile(title: Text(_questiions[i].answers[i]), value: _questiions[i].answers[i], groupValue: _groupValueRadioButtons,
+    list.add(RadioListTile(title: Text(answers[i]), value: answers[i], groupValue: _groupValueRadioButtons,
         onChanged: (value){setState(() {
           _groupValueRadioButtons = value;
         });} ));
@@ -94,7 +87,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           children: <Widget>[
             Expanded(child: background),
             Text(
-              _questiions[_questionIndex - 1].text,
+              currentQuestion.text,
               style: TextStyle(fontSize: 18),
             ),
             Expanded(
@@ -107,7 +100,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               child: RaisedButton(
                 child: Text('SUBMIT'),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/game/over');
+                  //_questiions[_questionIndex-1].answers.forEach((f) => print(f.toString()));
+                  print('Correcta ' + _questiions[_questionIndex - 1].answers[0] + ' pos ' + _questionIndex.toString());
+                  //Next round or win
+                  if(_groupValueRadioButtons == _questiions[_questionIndex - 1].answers[0]){
+                      print('Next round or win');
+                      if(_questionIndex < _numQuestion){
+                        setState(() {
+
+                        setQuestions();
+                        });
+                      }
+                      else{
+                        Navigator.pushNamed(context, '/game/won');
+                      }
+
+                  }
+                  else{
+                    Navigator.pushNamed(context, '/game/over');
+                  }
                 },
               ),
             )
