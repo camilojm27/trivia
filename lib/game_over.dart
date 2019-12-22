@@ -10,7 +10,7 @@ class GameOverFragment extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Expanded(child: SvgPicture.asset('assets/images/try_again.svg')),
-              RaisedButton(child: Text('TRY AGAIN'),onPressed: (){Navigator.popAndPushNamed(context, '/');})
+              RaisedButton(child: Text('TRY AGAIN'),onPressed: (){Navigator.pushNamedAndRemoveUntil(context, '/game', (Route<dynamic> route) => false);})
             ],
           )),
     );

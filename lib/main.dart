@@ -1,3 +1,4 @@
+//Navigation https://medium.com/flutter-community/flutter-push-pop-push-1bb718b13c31
 import 'package:trivia/game_over.dart';
 import 'package:trivia/game_won.dart';
 
@@ -12,7 +13,7 @@ class Trivia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: '/game',
+      initialRoute: '/',
       routes: {
         '/' : (context) => AndroidTriviaHome(title: _titulo,),
         '/game' : (context) => MyStatefulWidget(),

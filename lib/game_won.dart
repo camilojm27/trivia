@@ -10,7 +10,7 @@ class GameWonFragment extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Expanded(child: SvgPicture.asset('assets/images/you_win.svg')),
-              RaisedButton(child: Text('NEXT MATCH'),onPressed: (){Navigator.popAndPushNamed(context, '/');})
+              RaisedButton(child: Text('NEXT MATCH'),onPressed: (){Navigator.pushNamedAndRemoveUntil(context, '/', (Route<dynamic> route) => false);})
             ],
           )),
     );
